@@ -9,6 +9,8 @@ SITE_ROOT = os.path.join(BASE_DIR, 'site')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('home.urls')),
+    path('hello1/', include('hello1.urls')),
     path('polls/', include('polls.urls')),    
     path('solo1/', include('solo1.urls')),                                                                                       
     re_path(r'^site/(?P<path>.*)$', serve,
