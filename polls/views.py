@@ -10,6 +10,7 @@ from .models import Question, Choice
 def owner(request: HttpRequest) -> HttpResponse:
     response = HttpResponse()
     response.write("Hello, world. f312f87c is the polls index.")
+    response.write("2a203bc5")
     return response
 
 def index(request):
