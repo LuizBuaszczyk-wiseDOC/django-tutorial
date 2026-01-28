@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'social_django',
     'taggit',
     'home.apps.HomeConfig',
+    'myarts.apps.MyartsConfig'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
