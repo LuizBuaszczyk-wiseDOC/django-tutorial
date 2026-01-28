@@ -1,0 +1,10 @@
+{% extends "base_bootstrap.html" %}
+
+{% block content %}
+  <h1>{{ad.title}}</h1>
+  <p>{{ad.price}}</p>
+  <p>{{ad.text}}</p>
+  <p>
+    <a href="{% url 'mkt:all' %}">All Ads</a>
+  </p>
+{% endblock %}

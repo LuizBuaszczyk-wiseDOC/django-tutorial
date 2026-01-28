@@ -1,0 +1,21 @@
+{% extends "base_bootstrap.html" %}
+
+{% block content %}
+  <h1>Market</h1>
+  {% if ad_list %}
+  <ul>
+    {% for ad in ad_list %}
+      <li>
+          <a href="{% url 'mkt:ad_detail' ad.id %}">{{ ad.title }}</a>
+          (<a href="{% url 'mkt:ad_update' ad.id %}">Update</a> |
+          <a href="{% url 'mkt:ad_delete' ad.id %}">Delete</a>)
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no ads in the library.</p>
+  {% endif %}
+  <p>
+  <a href="{% url 'mkt:ad_create' %}">Add a AD</a>
+  </p>
+{% endblock %}
