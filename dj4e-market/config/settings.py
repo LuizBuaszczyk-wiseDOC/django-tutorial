@@ -99,18 +99,18 @@ WSGI_APPLICATION = "config.wsgi.application"
 # password and a database named "market"
 
 # Change all the "drchuck" below to be your PythonAnywhere Account
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'drchuck$market',
-        'USER': 'drchuck',
-        'PASSWORD': 'phone_153742',
-        'HOST': 'drchuck.mysql.pythonanywhere-services.com',
-         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'drchuck$market',
+#         'USER': 'drchuck',
+#         'PASSWORD': 'phone_153742',
+#         'HOST': 'drchuck.mysql.pythonanywhere-services.com',
+#          'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+#         },
+#     }
+# }
 
 # Comment this use of Sqlite out so your application uses MySQL
 DATABASES = {
