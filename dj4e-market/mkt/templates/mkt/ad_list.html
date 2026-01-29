@@ -11,6 +11,13 @@
             (<a href="{% url 'mkt:ad_update' ad.id %}">Update</a> |
             <a href="{% url 'mkt:ad_delete' ad.id %}">Delete</a>)
           {% endif %}
+          {% if user.is_authenticated %}
+            <dj4e-favstar 
+                onclick="favToggle(this, '{% url 'mkt:ad_toggle' ad.id %}');"
+                {% if ad.id in favorites %} fav {% endif %} 
+            >
+            </dj4e-favstar>
+          {% endif %}
       </li>
     {% endfor %}
   </ul>
@@ -20,4 +27,26 @@
   <p>
   <a href="{% url 'mkt:ad_create' %}">Add a AD</a>
   </p>
+
+  <script>  
+  function favToggle(element, url) {
+      console.log('POSTing to', url);
+      fetch(url, { method: 'POST', body: '{}' } )
+      .then((response) => {
+          if (!response.ok) { // Check if the response status is in the 2xx range (success)
+              console.log("If you see this error, it is likely in ToggleFavoriteView()");
+              console.log("Note: It is easier to diagnose this error FireFox.");
+              throw new Error(`AJAX/fetch error status: ${response.status}, see developer console.`)
+          }
+          return response.text();
+      })
+      .then((response) => {
+          console.log(url, response);
+          element.toggleAttribute('fav');
+      }).catch((error) => {
+          alert(`Url ${url} failed ${error}`);
+      });
+  }
+  </script>
+  <script type="module" src="/site/wc/dj4e-favstar.js"></script>
 {% endblock %}
