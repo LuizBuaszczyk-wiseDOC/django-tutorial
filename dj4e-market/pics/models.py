@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.conf import settings
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class Pic(models.Model):
@@ -10,6 +11,7 @@ class Pic(models.Model):
     )
     text = models.TextField()
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    tags = TaggableManager(blank=True)
     
     # Picture
     picture = models.BinaryField(null=True, blank=True, editable=True)

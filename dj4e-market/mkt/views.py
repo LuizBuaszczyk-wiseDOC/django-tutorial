@@ -3,6 +3,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.http import HttpResponse
+from django.db.models import Q
 
 from mkt.models import Ad, Comment, Fav
 from mkt.owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
@@ -14,7 +15,16 @@ class AdListView(OwnerListView):
     template_name = "mkt/ad_list.html"
     
     def get(self, request):
-        ad = Ad.objects.all()
+        strval = request.GET.get("search", False)
+        
+        if strval:
+            query = Q(title__contains=strval)
+            query.add(Q(text__contains=strval), Q.OR)
+            query.add(Q(tags__name__in=[strval]), Q.OR)
+            ad = Ad.objects.filter(query)
+        else:
+            ad = Ad.objects.all()
+            
         favorites = list()
         if request.user.is_authenticated:
             rows = request.user.favorite_ads.values('id')
@@ -51,9 +61,10 @@ class AdCreateView(LoginRequiredMixin, View):
             return render(request, self.template_name, ctx)
 
         # Add owner to the model before saving
-        pic = form.save(commit=False)
-        pic.owner = self.request.user
-        pic.save()  
+        ad = form.save(commit=False)
+        ad.owner = self.request.user
+        ad.save()  
+        form.save_m2m()
         return redirect(self.success_url)
 
 class AdUpdateView(LoginRequiredMixin, View):

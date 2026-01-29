@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
 from django.conf import settings
+from taggit.managers import TaggableManager
 
 class Ad(models.Model) :
     title = models.CharField(
@@ -10,6 +11,7 @@ class Ad(models.Model) :
     price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
     text = models.TextField()
     
+    tags = TaggableManager(blank=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     comments = models.ManyToManyField(settings.AUTH_USER_MODEL,
         through='Comment', related_name='comments_owned')

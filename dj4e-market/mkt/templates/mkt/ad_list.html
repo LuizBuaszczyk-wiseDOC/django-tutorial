@@ -1,6 +1,16 @@
 {% extends "base_menu.html" %}
 
 {% block content %}
+  <div style="float:right">
+  <form>
+    <input type="text" placeholder="Search.." name="search"
+    {% if search %} value="{{ search }}" {% endif %}
+    >
+    <button type="submit"><i class="fa fa-search"></i></button>
+  <a href="{% url 'mkt:all' %}"><i class="fa fa-undo"></i></a>
+  </form>
+  </div>
+
   <h1>Market</h1>
   {% if ad_list %}
   <ul>
