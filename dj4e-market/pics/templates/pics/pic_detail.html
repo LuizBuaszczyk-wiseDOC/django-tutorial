@@ -1,0 +1,7 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
+  <h1>{{pic.title}}</h1>
+  <p>{{pic.text}}</p>
+  <img src="data:{{pic.content_type}};base64,{{pic.picture}}" alt="{{pic.title}}">
+{% endblock %}

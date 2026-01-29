@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'taggit',
     'home.apps.HomeConfig',
     'mkt.apps.MktConfig',
+    'pics.apps.PicsConfig',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

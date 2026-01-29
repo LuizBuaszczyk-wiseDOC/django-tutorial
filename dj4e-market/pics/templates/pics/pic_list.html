@@ -1,0 +1,21 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
+  <h1>Pictures</h1>
+  {% if pic_list %}
+  <ul>
+    {% for pic in pic_list %}
+      <li>
+          <a href="{% url 'pics:pic_detail' pic.id %}">{{ pic.title }}</a>
+          (<a href="{% url 'pics:pic_update' pic.id %}">Update</a> |
+          <a href="{% url 'pics:pic_delete' pic.id %}">Delete</a>)
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no pics in the library.</p>
+  {% endif %}
+  <p>
+  <a href="{% url 'pics:pic_create' %}">Add a Picture</a>
+  </p>
+{% endblock %}
